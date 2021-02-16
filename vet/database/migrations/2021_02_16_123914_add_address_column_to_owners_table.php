@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddAddressColumnToOwners2Table extends Migration
+class AddAddressColumnToOwnersTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class AddAddressColumnToOwners2Table extends Migration
      */
     public function up()
     {
-        Schema::table('owner2s', function (Blueprint $table) {
+        Schema::table('owners', function (Blueprint $table) {
             $table->string('address_1', 255);
             $table->string('address_2', 255)->nullable();
             $table->string('town', 255);
@@ -28,7 +28,7 @@ class AddAddressColumnToOwners2Table extends Migration
      */
     public function down()
     {
-        Schema::table('owner2s', function (Blueprint $table) {
+        Schema::table('owners', function (Blueprint $table) {
             $table->dropColumn('address_1');
             $table->dropColumn('address_2');
             $table->dropColumn('town');
