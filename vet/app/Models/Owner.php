@@ -27,7 +27,7 @@ class Owner extends Model
         }
 
         return "Yes we have {$number} bananas";
-    }
+    }    
 
     public function fullName(): string
     {
