@@ -23,5 +23,7 @@ Route::group(["prefix" => "owners"], function () {
     // otherwise 'create' will get included in that
     Route::get('create', [OwnerController::class, "create"]);
     Route::post('create', [OwnerController::class, "createPost"]);
+    Route::get('update', [OwnerController::class, "update"]);
+    Route::post('update', [OwnerController::class, "updatePost"]);
     Route::get('{owner}', [OwnerController::class, "show"]);
 });

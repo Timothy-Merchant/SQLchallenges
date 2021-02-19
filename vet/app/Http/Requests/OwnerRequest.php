@@ -13,7 +13,7 @@ class OwnerRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +24,14 @@ class OwnerRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            "first_name" => ["required", "string", "max:100"],
+            "last_name" => ["required", "string", "min:3"],
+            "telephone" => ["required", "string", "min:3"],
+            "email" => ["required", "string", "min:3"],
+            "address_1" => ["required", "string", "min:3"],
+            "address_2" => ["required", "string", "min:3"],
+            "town" => ["required", "string", "min:3"],
+            "postcode" => ["required", "string", "min:3"],
         ];
     }
 }

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Owner;
+use App\Http\Requests\OwnerRequest;
 
 class OwnerController extends Controller
 {
@@ -28,7 +29,7 @@ class OwnerController extends Controller
         return view('form');
     }
 
-    public function createPost(Request $request)
+    public function createPost(OwnerRequest $request)
     {
         // get all of the submitted data
         $data = $request->all();
@@ -36,5 +37,19 @@ class OwnerController extends Controller
         $owner = Owner::create($data);
         // redirect the browser to the new article
         return redirect("/owners/{$owner->id}");
+    }
+
+    public function update()
+    {
+        return view('update');
+    }
+
+    public function updatePost(OwnerRequest $request)
+    {
+        $owner = Owner::find($id);
+        $owner->whatever = $whatever;
+        $owner->save();
+
+        return redirect("/owners/{$owner->id}")->with('message', 'User has been updated!');
     }
 }
