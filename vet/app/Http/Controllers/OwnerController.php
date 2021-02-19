@@ -20,6 +20,21 @@ class OwnerController extends Controller
         // Pass the Owner object in from the controller
         // Use Route Model Binding to get 404s working
         // $owner = Owner::find($owner);                
-        return view('show', ['owner' => $owner]);         
+        return view('show', ['owner' => $owner]);
+    }
+
+    public function create()
+    {
+        return view('form');
+    }
+
+    public function createPost(Request $request)
+    {
+        // get all of the submitted data
+        $data = $request->all();
+        // create a new article, passing in the submitted data
+        $owner = Owner::create($data);
+        // redirect the browser to the new article
+        return redirect("/owners/{$owner->id}");
     }
 }

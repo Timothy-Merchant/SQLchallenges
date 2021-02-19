@@ -12,7 +12,6 @@ class RoutingTest extends TestCase
 {
     use RefreshDatabase;
 
-    
     public function test_for_200()
     {        
         Owner::Create([

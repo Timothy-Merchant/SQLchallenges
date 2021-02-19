@@ -9,6 +9,17 @@ class Owner extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'first_name',
+        'last_name',
+        'telephone',
+        'email',
+        'address_1',
+        'address_2',
+        'town',
+        'postcode',
+    ];
+
     public static function emailAlreadyExists($user, $email): string
     {
         if ($user->email === $email) {
@@ -27,7 +38,7 @@ class Owner extends Model
         }
 
         return "Yes we have {$number} bananas";
-    }    
+    }
 
     public function fullName(): string
     {
@@ -51,15 +62,4 @@ class Owner extends Model
 
         return $phoneNumber;
     }
-
-    protected $fillable = [
-        'first_name',
-        'last_name',
-        'telephone',
-        'email',
-        'address_1',
-        'address_2',
-        'town',
-        'postcode',
-    ];
 }
