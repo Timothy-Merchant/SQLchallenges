@@ -1,8 +1,9 @@
 <?php
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\OwnerController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\OwnerController;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,6 +15,7 @@ use App\Http\Controllers\HomeController;
 | contains the "web" middleware group. Now create something greatow
 */
 
+Auth::routes(['register' => false]);
 
 Route::get('/', [OwnerController::class, 'index']);
 Route::get('/', [HomeController::class, 'index']);
@@ -27,3 +29,7 @@ Route::group(["prefix" => "owners"], function () {
     Route::post('update', [OwnerController::class, "updatePost"]);
     Route::get('{owner}', [OwnerController::class, "show"]);
 });
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
