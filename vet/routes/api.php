@@ -2,6 +2,7 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\http\controllers\API\OwnerController;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,3 +18,9 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+Route::get('/owners/all', [OwnerController::class, "index"]);
+Route::get('/owners/{owner}', [OwnerController::class, "show"]);
+Route::post('/owners/create', [OwnerController::class, "store"]);
+Route::put('/owners/update/{owner}', [OwnerController::class, "update"]);
+Route::delete('/owners/{owner}', [OwnerController::class, "destroy"]);

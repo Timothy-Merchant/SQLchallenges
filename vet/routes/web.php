@@ -17,17 +17,17 @@ use App\Http\Controllers\OwnerController;
 
 Auth::routes(['register' => false]);
 
-Route::get('/', [OwnerController::class, 'index']);
 Route::get('/', [HomeController::class, 'index']);
 
 Route::group(["prefix" => "owners"], function () {
     // add *above* route with URL parameter
-    // otherwise 'create' will get included in that
+    // otherwise 'create' will get included in that    
+    Route::get('/all', [OwnerController::class, 'index']);
     Route::get('create', [OwnerController::class, "create"]);
     Route::post('create', [OwnerController::class, "createPost"]);
-    Route::get('update', [OwnerController::class, "update"]);
-    Route::post('update', [OwnerController::class, "updatePost"]);
-    Route::get('{owner}', [OwnerController::class, "show"]);
+    Route::get('{owner}/update', [OwnerController::class, "update"]);
+    Route::post('{owner}/update', [OwnerController::class, "updatePost"]);
+    Route::get('{owner}/show', [OwnerController::class, "show"]);
 });
 
 Auth::routes();
