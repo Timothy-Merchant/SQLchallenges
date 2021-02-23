@@ -8,4 +8,14 @@ use Illuminate\Database\Eloquent\Model;
 class Animal extends Model
 {
     use HasFactory;
+
+    public function owner()
+    {
+        return $this->belongsTo(Owner::class);
+    }
+
+    public function dangerous()
+    {
+        return $this->Biteyness > 3;        
+    }
 }

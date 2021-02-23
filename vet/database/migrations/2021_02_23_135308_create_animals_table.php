@@ -23,7 +23,7 @@ class CreateAnimalsTable extends Migration
             $table->integer("Biteyness");
             $table->timestamps();            
             $table->foreignId("owner_id")
-                ->constrained()
+                ->constrained() 
                 ->onDelete("cascade");            
         });
     }

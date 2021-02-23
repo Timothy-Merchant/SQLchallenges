@@ -20,6 +20,11 @@ class Owner extends Model
         'postcode',
     ];
 
+    public function animals()
+    {
+        return $this->hasMany(Animal::class);
+    }
+
     public static function emailAlreadyExists($user, $email): string
     {
         if ($user->email === $email) {
