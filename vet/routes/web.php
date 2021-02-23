@@ -20,16 +20,26 @@ Auth::routes(['register' => false]);
 Route::get('/', [HomeController::class, 'index']);
 
 Route::group(["prefix" => "owners"], function () {
-    // add *above* route with URL parameter
-    // otherwise 'create' will get included in that    
+
     Route::get('/all', [OwnerController::class, 'index']);
-    Route::get('create', [OwnerController::class, "create"]);
-    Route::post('create', [OwnerController::class, "createPost"]);
-    Route::get('{owner}/update', [OwnerController::class, "update"]);
-    Route::post('{owner}/update', [OwnerController::class, "updatePost"]);
     Route::get('{owner}/show', [OwnerController::class, "show"]);
+
+    Route::group(["middleware" => "auth"], function () {
+        Route::get('create', [OwnerController::class, "create"]);
+        Route::post('create', [OwnerController::class, "createPost"]);
+        Route::get('{owner}/update', [OwnerController::class, "update"]);
+        Route::post('{owner}/update', [OwnerController::class, "updatePost"]);
+    });
 });
 
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+Auth::routes();
+
+Route::get('logout', '\App\Http\Controllers\Auth\LoginController@logout');

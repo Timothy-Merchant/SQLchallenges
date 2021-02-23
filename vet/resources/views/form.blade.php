@@ -29,7 +29,7 @@
                 <input id="telephone" class="form-control @error('telephone') is-invalid @enderror" value="{{ $owner->telephone ?? old('telephone') }}" name="telephone" class="form-control" />
                 @error('telephone')
                     <p class="required">
-                        {{ $message }}
+                        {{ $message }}        
                     </p>
                 @enderror
             </div>

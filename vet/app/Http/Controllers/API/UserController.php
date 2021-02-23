@@ -2,22 +2,21 @@
 
 namespace App\Http\Controllers\API;
 
-use App\Models\Owner;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\API\OwnerRequest;
-use App\Http\Resources\API\OwnerResource;
+use Illuminate\Http\Request;
+use App\Models\User;
 
-class OwnerController extends Controller
+class UserController extends Controller
 {
-    /**
+      /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
     public function index()
     {
-        $owners = Owner::all();
-        return $owners;
+        $users = User::all();
+        return $users;
     }
 
     /**
@@ -26,11 +25,11 @@ class OwnerController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(OwnerRequest $request)
+    public function store(Request $request)
     {
         $data = $request->all();
 
-        return Owner::create($data);
+        return User::create($data);
     }
 
     /**
@@ -39,9 +38,9 @@ class OwnerController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Owner $owner)
+    public function show(User $user)
     {
-        return new OwnerResource($owner);
+        return $user;
     }
 
     /**
@@ -51,15 +50,15 @@ class OwnerController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(OwnerRequest $request, Owner $owner)
+    public function update(Request $request, User $user)
     {
         // get the request data
         $data = $request->all();
         // update the article using the fill method
         // then save it to the database
-        $owner->fill($data)->save();
+        $user->fill($data)->save();
         // return the updated version
-        return $owner;
+        return $user;
     }
 
     /**
@@ -68,9 +67,9 @@ class OwnerController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Owner $owner)
+    public function destroy(User $user)
     {
-        $owner->delete();
+        $user->delete();
         return response(null, 204);
     }
 }
