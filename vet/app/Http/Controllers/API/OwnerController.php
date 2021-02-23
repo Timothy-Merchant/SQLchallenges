@@ -39,7 +39,7 @@ class OwnerController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Owner $owner)
+    public function show(OwnerRequest $owner)
     {
         return new OwnerResource($owner);
     }
