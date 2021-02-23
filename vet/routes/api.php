@@ -3,6 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\http\controllers\API\OwnerController;
+use App\http\controllers\API\Owners\AnimalController;
 use App\http\controllers\API\UserController;
 
 /*

@@ -8,6 +8,16 @@ use Illuminate\Database\Eloquent\Model;
 class Animal extends Model
 {
     use HasFactory;
+    
+    protected $fillable = [
+        "name",
+        "type",
+        "date_of_birth",
+        "Weight",
+        "Height",
+        "Biteyness",
+        "owner_id",
+    ];
 
     public function owner()
     {
@@ -16,6 +26,6 @@ class Animal extends Model
 
     public function dangerous()
     {
-        return $this->Biteyness > 3;        
+        return $this->Biteyness > 3;
     }
 }

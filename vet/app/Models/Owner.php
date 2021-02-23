@@ -47,7 +47,7 @@ class Owner extends Model
 
     public function fullName(): string
     {
-        return $this->first_name;
+        return $this->first_name . " " . $this->last_name;
     }
 
     public function fullAddress(): string

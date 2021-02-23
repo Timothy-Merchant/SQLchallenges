@@ -2,8 +2,12 @@
 
 namespace App\Http\Controllers\API\Owners;
 
-use App\Http\Controllers\Controller;
+use App\Models\Owner;
+use App\Models\Animal;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use App\Http\Requests\API\AnimalRequest;
+use App\Http\Resources\API\AnimalResource;
 
 class AnimalController extends Controller
 {
@@ -12,9 +16,9 @@ class AnimalController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Owner $owner)
     {
-        //
+        return $owner->animals;
     }
 
     /**
@@ -23,9 +27,13 @@ class AnimalController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request, Owner $owner)
     {
-        //
+        $data = $request->all();
+        $animal = new Animal($data);
+        $animal->owner()->associate($owner);
+        $animal->save();
+        return new AnimalResource($animal);
     }
 
     /**
@@ -34,9 +42,10 @@ class AnimalController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Owner $owner, Animal $animal)
     {
-        //
+        // return the comment
+        return new AnimalResource($animal);
     }
 
     /**
@@ -46,9 +55,12 @@ class AnimalController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Owner $owner, Animal $animal)
     {
-        //
+        $data = $request->all();
+        $animal->fill($data);
+        $animal->save();
+        return new AnimalResource($animal);
     }
 
     /**
@@ -57,8 +69,9 @@ class AnimalController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Owner $owner, Animal $animal)
     {
-        //
+        $animal->delete();
+        return response(null, 204);
     }
 }
