@@ -31,7 +31,7 @@ class OwnerController extends Controller
         $data = $request->all();
 
         return Owner::create($data);
-    }
+    }    
 
     /**
      * Display the specified resource.
