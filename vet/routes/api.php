@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\http\controllers\API\OwnerController;
 use App\http\controllers\API\Owners\AnimalController;
 use App\http\controllers\API\UserController;
+use App\Http\Middleware\EnsureOwnerIsValid;
 
 /*
 |--------------------------------------------------------------------------
@@ -35,7 +36,7 @@ Route::group(["prefix" => "owners"], function () {
         Route::put("update", [OwnerController::class, "update"]);
         Route::delete("destroy", [OwnerController::class, "destroy"]);
 
-        Route::group(["prefix" => "animals"], function () {
+        Route::group(["prefix" => "animals", "middleware" => EnsureOwnerIsValid::class], function () {
             Route::get("all", [AnimalController::class, "index"]);
             Route::post("create", [AnimalController::class, "store"]);
 
