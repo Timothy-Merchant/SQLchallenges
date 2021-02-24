@@ -66,5 +66,5 @@ class Owner extends Model
         $phoneNumber = "{$areaCode} {$nextThree} {$lastFour}";
 
         return $phoneNumber;
-    }
+    }    
 }

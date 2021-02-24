@@ -17,7 +17,7 @@ class EnsureOwnerIsValid
     public function handle(Request $request, Closure $next)
     {
         if ($request->route("owner")->id !== $request->route("animal")->owner_id) {
-            abort(404);
+            abort(404, "Animal ID does not match Owner ID.");
         }
 
         return $next($request);
