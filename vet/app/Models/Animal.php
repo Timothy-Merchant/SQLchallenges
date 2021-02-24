@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Animal extends Model
 {
     use HasFactory;
-    
+
     protected $fillable = [
         "name",
         "type",
@@ -22,6 +22,11 @@ class Animal extends Model
     public function owner()
     {
         return $this->belongsTo(Owner::class);
+    }
+
+    public function treatments()
+    {
+        return $this->belongsToMany(Treatment::class);
     }
 
     public function dangerous()
