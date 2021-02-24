@@ -17,6 +17,7 @@ class Animal extends Model
         "Height",
         "Biteyness",
         "owner_id",
+        "tags"
     ];
 
     public function owner()
@@ -32,5 +33,15 @@ class Animal extends Model
     public function dangerous()
     {
         return $this->Biteyness > 3;
+    }
+
+    public function setTags(array $strings): Animal
+    {
+        $treatments = Treatment::fromStrings($strings);
+        // we're on an article instance, so use $this
+        // pass in collection of IDs
+        $this->treatments()->sync($treatments->pluck("id"));
+        // return $this in case we want to chain
+        return $this;
     }
 }

@@ -19,6 +19,19 @@
             @endif
             <strong>Belongs to:</strong>
             <p class="mb-1">{{ $animal->owner->fullName() }}</p>
+            <strong>Treatments:</strong>
+            @if (count($animal->treatments) > 0)
+                @foreach ($animal->treatments as $treatment)
+                    <p class="mb-1">{{ $treatment->name }}</p>
+                @endforeach
+            @else
+                <p class="mb-1">None</p>
+            @endif
+            <a href="{{ $animal->id . '/animals' }}" class="list-group-item list-group-item-action">Add Treatment</a>
+            <a href="{{ $animal->id . '/animals/create' }}" class="list-group-item list-group-item-action">Edit
+                Animal</a>
+
+            <a href="{{ $animal->id . '/destroy' }}" class="list-group-item list-group-item-action">Remove Animal</a>
             <hr>
         </div>
     </a>

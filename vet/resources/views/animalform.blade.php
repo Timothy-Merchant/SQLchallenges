@@ -4,7 +4,6 @@
     <form class="form card" method="post">
         @csrf
         <h2 class="card-header">{{ $formHeader }}</h2>
-
         <fieldset class="card-body">
             <div class="form-group">
                 <label for="name">Name</label>
@@ -58,15 +57,15 @@
                 @enderror
             </div>
             <div class="form-group">
-                <label for="biteyness">Biteyness...</label>
-                <input id="biteyness" class="form-control @error('biteyness') is-invalid @enderror"
-                    value="{{ $animal->biteyness ?? old('biteyness') }}" name="biteyness" class="form-control" />
-                @error('biteyness')
+                <label for="Biteyness">Biteyness...</label>
+                <input id="Biteyness" class="form-control @error('Biteyness') is-invalid @enderror"
+                    value="{{ $animal->Biteyness ?? old('Biteyness') }}" name="Biteyness" class="form-control" />
+                @error('Biteyness')
                     <p class="required">
                         {{ $message }}
                     </p>
                 @enderror
-            </div>            
+            </div>
         </fieldset>
 
         <div class="card-footer text-right">

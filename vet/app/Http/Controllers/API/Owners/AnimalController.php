@@ -18,7 +18,9 @@ class AnimalController extends Controller
      */
     public function index(Owner $owner)
     {
-        return $owner->animals;
+        foreach($owner->animals as $animal){
+            return new AnimalResource($animal);
+        }        
     }
 
     /**
@@ -30,7 +32,7 @@ class AnimalController extends Controller
     public function store(Request $request, Owner $owner)
     {
         $data = $request->all();
-        $animal = new Animal($data);
+        $animal = Animal::create($data)->setTreatments($request->get("treatments"));        
         $animal->owner()->associate($owner);
         $animal->save();
         return new AnimalResource($animal);
@@ -60,6 +62,7 @@ class AnimalController extends Controller
         $data = $request->all();
         $animal->fill($data);
         $animal->save();
+        $animal->setTreatments($request->get("treatments"));
         return new AnimalResource($animal);
     }
 

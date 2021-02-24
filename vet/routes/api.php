@@ -27,20 +27,20 @@ Route::post('/users/create', [UserController::class, "store"]);
 Route::put('/users/update/{owner}', [UserController::class, "update"]);
 Route::delete('/users/{owner}', [UserController::class, "destroy"]);
 
-Route::get("/animals/all", [AnimalController::class, "index"]);
 
 Route::group(["prefix" => "owners"], function () {
     Route::get("all", [OwnerController::class, "index"]);
     Route::post("create", [OwnerController::class, "store"]);
-
+    
     Route::group(["prefix" => "{owner}"], function () {
         Route::get("show", [OwnerController::class, "show"]);
         Route::put("update", [OwnerController::class, "update"]);
         Route::delete("destroy", [OwnerController::class, "destroy"]);
-
-        Route::group(["prefix" => "animals", "middleware" => EnsureOwnerIsValid::class], function () {            
+        
+        Route::get("animals/all", [AnimalController::class, "index"]);
+        
+        Route::group(["prefix" => "animals", "middleware" => EnsureOwnerIsValid::class], function () {
             Route::post("create", [AnimalController::class, "store"]);
-
             Route::group(["prefix" => "{animal}"], function () {
                 Route::get("show", [AnimalController::class, "show"]);
                 Route::put("update", [AnimalController::class, "update"]);

@@ -30,10 +30,14 @@ class AnimalController extends Controller
         return view('animalform', ['formHeader' => $formHeader, 'formButton' => $formButton]);
     }
 
-    public function createPost(Request $request)
+    public function createPost(Request $request, Owner $owner)
     {
         $data = $request->all();
-        $animal = Animal::create($data);
+        $animal = new Animal($data);
+        $animal->owner()->associate($owner);
+        // $animal->setTreatments($request->get("treatments"));
+        $animal->owner_id = $owner->id;
+        $animal->save();
         return redirect("/animals/{$animal->id}");
     }
 
@@ -49,7 +53,7 @@ class AnimalController extends Controller
         $data = $request->all();
         $animal->update($data);
         $animal->save();
-
+        $animal->setTags($request->get("treatments"));
         return redirect("/animals/{$animal->id}")->with('message', 'User has been updated!');
     }
 }
