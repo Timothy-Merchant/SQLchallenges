@@ -18,9 +18,9 @@ class AnimalController extends Controller
      */
     public function index(Owner $owner)
     {
-        foreach($owner->animals as $animal){
+        foreach ($owner->animals as $animal) {
             return new AnimalResource($animal);
-        }        
+        }
     }
 
     /**
@@ -29,12 +29,13 @@ class AnimalController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request, Owner $owner)
+    public function store(AnimalRequest $request, Owner $owner)
     {
-        $data = $request->all();
-        $animal = Animal::create($data)->setTreatments($request->get("treatments"));        
+        $data = $request->all();     
+        $animal = new Animal($data);                 
         $animal->owner()->associate($owner);
         $animal->save();
+        $animal->setTreatments($request->get("treatments"));
         return new AnimalResource($animal);
     }
 
@@ -57,7 +58,7 @@ class AnimalController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Owner $owner, Animal $animal)
+    public function update(AnimalRequest $request, Owner $owner, Animal $animal)
     {
         $data = $request->all();
         $animal->fill($data);

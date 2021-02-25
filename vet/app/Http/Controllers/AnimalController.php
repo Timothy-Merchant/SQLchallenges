@@ -38,7 +38,7 @@ class AnimalController extends Controller
         // $animal->setTreatments($request->get("treatments"));
         $animal->owner_id = $owner->id;
         $animal->save();
-        return redirect("/animals/{$animal->id}");
+        return redirect("/owners/{$owner->id}");
     }
 
     public function update(Animal $animal)

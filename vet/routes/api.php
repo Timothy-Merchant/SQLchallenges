@@ -38,8 +38,8 @@ Route::group(["prefix" => "owners"], function () {
         Route::delete("destroy", [OwnerController::class, "destroy"]);
         
         Route::get("animals/all", [AnimalController::class, "index"]);
-        
-        Route::group(["prefix" => "animals", "middleware" => EnsureOwnerIsValid::class], function () {
+        // , "middleware" => EnsureOwnerIsValid::class
+        Route::group(["prefix" => "animals"], function () {
             Route::post("create", [AnimalController::class, "store"]);
             Route::group(["prefix" => "{animal}"], function () {
                 Route::get("show", [AnimalController::class, "show"]);

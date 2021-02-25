@@ -16,8 +16,7 @@ class Animal extends Model
         "Weight",
         "Height",
         "Biteyness",
-        "owner_id",
-        "tags"
+        "owner_id",        
     ];
 
     public function owner()
@@ -35,7 +34,7 @@ class Animal extends Model
         return $this->Biteyness > 3;
     }
 
-    public function setTags(array $strings): Animal
+    public function setTreatments(array $strings): Animal
     {
         $treatments = Treatment::fromStrings($strings);
         // we're on an article instance, so use $this
