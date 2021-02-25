@@ -2,6 +2,7 @@
 
 namespace Tests\Unit;
 
+use App\Adder;
 use PHPUnit\Framework\TestCase;
 
 class AdderTest extends TestCase
@@ -11,8 +12,13 @@ class AdderTest extends TestCase
      *
      * @return void
      */
-    public function test_example()
+    public function setUp(): void
     {
-        $this->assertTrue(true);
+        $this->adder = new Adder();
+    }
+
+    public function testOnePlus0()
+    {
+        $this->assertSame(1, $this->adder->add(1, 0));
     }
 }
